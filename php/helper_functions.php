@@ -6,7 +6,7 @@
  * Time: 00:00
  */
 
-class HelperFunctions{
+class HelperFunctions {
 
     //extract clean date for saving in DB and return array
     public static function getDate($dateString){

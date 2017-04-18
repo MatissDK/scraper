@@ -8,10 +8,10 @@
 
 require('scraper_logic.php');
 
+//ScraperLogic::getCourtInfo();
+//ScraperLogic::getDate();
 ScraperLogic::getUrl();
-
-ScraperLogic::getDate();
-
+?>
 
 
 

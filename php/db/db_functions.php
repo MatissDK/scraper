@@ -42,7 +42,7 @@ class DbFunctions
             ) LIMIT 1;";
 
         if ($connection->query($query)) {
-            if($connection->affected_rows>0)
+            if ($connection->affected_rows > 0)
             {
                 print_r('Do something else . <br>');
                 printf("Select returned %d rows.\n", $connection->affected_rows);

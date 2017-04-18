@@ -5,21 +5,19 @@
  * Date: 22/02/2017
  * Time: 08:06
  */
-require('../libs/simplehtmldom_1_5/simple_html_dom.php');
+
+
 require 'db/db_functions.php';
 require 'helper_functions.php';
+require('../libs/simplehtmldom_1_5/simple_html_dom.php');
 
-class ScraperLogic{
+class ScraperLogic {
 
-    //static $test;
-
+    //ending of this url should be not static
     const URL = 'http://tis.ta.gov.lv/court.jm.gov.lv/stat/html/index_201704.html';
-
     const PART_URL = 'http://tis.ta.gov.lv/court.jm.gov.lv/stat/html/';
 
-//    public function showConstant(){
-//        echo self::URL;
-//    }
+    const URL1 = 'http://tis.ta.gov.lv/court.jm.gov.lv/stat/html/111_201704.html';
 
     //gets all URL from main page
     public static function getUrl(){
@@ -34,6 +32,24 @@ class ScraperLogic{
             //DbFunctions::saveUrl($link);
         }
         echo 'Link are saved </br>';
+    }
+
+    //get court info
+    public static function getCourtInfo(){
+       $html = file_get_html(self::URL1);
+       foreach ($html->find('span') as $el)
+       {
+           echo $el . '</br>';
+       }
+    }
+
+    //testing
+    public static function getDOM(){
+        // Create DOM from URL or file
+        $html = ['a'=>[1,2,3,4],'b' => ['ccc'=>[1,2,3,4,5],2,3]];
+        //$html = file_get_html(self::URL);
+        $jsonArray = json_encode($html);
+        return $jsonArray;
     }
 
 
