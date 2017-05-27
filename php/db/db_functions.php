@@ -6,6 +6,7 @@
  * Time: 22:39
  */
 include('connection.php');
+//error_reporting(0);
 class DbFunctions
 {
      static $count = 0;
@@ -44,16 +45,127 @@ class DbFunctions
         if ($connection->query($query)) {
             if ($connection->affected_rows > 0)
             {
-                print_r('Do something else . <br>');
-                printf("Select returned %d rows.\n", $connection->affected_rows);
-                $connection->close();
+//                printf("Select returned %d rows.\n", $connection->affected_rows);
+//                $connection->close();
+                return true;
             }
             else {
-                printf("Closing. Select returned %d rows.\n", $connection->affected_rows);
-                $connection->close();
+//                printf("Closing. Select returned %d rows. This date is already in the DB \n", $connection->affected_rows);
+//                $connection->close();
+                return false;
             }
         } else {
+            return false;
             $connection->close();
         }
     }
+
+    //for saving civilprocess
+    public static function saveCivilprocess($dataArray)
+    {
+        global $connection;
+        $data = "'" . implode("','", $dataArray) . "'";
+        if(is_array($dataArray))
+        {
+            $query = "INSERT INTO civilprocess (" . implode(',', array_keys($dataArray)) . ") values (". $data .")";
+            print_r($query);
+            die();
+//            $result = mysqli_real_escape_string($connection, $query);
+            $result = mysqli_query($connection, $query);
+
+            if (!$result)
+            {
+                die('Problem inserting date into DB </br>' . mysqli_error($connection));
+                $connection->close();
+            }
+        }
+    }
+
+    //for saving KRIMINALPROCESS
+    public static function saveKriminalprocess($dataArray)
+    {
+        global $connection;
+        $data = "'" . implode("','", $dataArray) . "'";
+        if(is_array($dataArray))
+        {
+            $query = "INSERT INTO civilprocess (" . implode(',', array_keys($dataArray)) . ") values (". $data .")";
+//            print_r($query);
+//            die();
+//            $result = mysqli_real_escape_string($connection, $query);
+            $result = mysqli_query($connection, $query);
+
+            if (!$result)
+            {
+                die('Problem inserting date into DB </br>' . mysqli_error($connection));
+            }
+        }
+    }
+
+    //for saving ADMINISTRATIVAIS PROCESS
+    public static function saveAdministrativaisProcess($dataArray)
+    {
+        global $connection;
+        $data = "'" . implode("','", $dataArray) . "'";
+        if(is_array($dataArray))
+        {
+            $query = "INSERT INTO civilprocess (" . implode(',', array_keys($dataArray)) . ") values (". $data .")";
+//            print_r($query);
+//            die();
+//            $result = mysqli_real_escape_string($connection, $query);
+            $result = mysqli_query($connection, $query);
+
+            if (!$result)
+            {
+                die('Problem inserting date into DB </br>' . mysqli_error($connection));
+            }
+        }
+    }
+
+    //for saving ADMINISTRATIVAIS PARKAPUMA PROCESS
+    public static function saveAdmnistrativaParkapumaProcess($dataArray)
+    {
+        global $connection;
+        $data = "'" . implode("','", $dataArray) . "'";
+        if(is_array($dataArray))
+        {
+            $query = "INSERT INTO civilprocess (" . implode(',', array_keys($dataArray)) . ") values (". $data .")";
+//            print_r($query);
+//            die();
+//            $result = mysqli_real_escape_string($connection, $query);
+            $result = mysqli_query($connection, $query);
+
+            if (!$result)
+            {
+                die('Problem inserting date into DB </br>' . mysqli_error($connection));
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

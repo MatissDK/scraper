@@ -32,4 +32,32 @@ class HelperFunctions {
         print_r($lastElement3);
     }
 
+    //analize which process/instance is it
+    public static function getCourtInfo($dom)
+    {
+        $courtInfo = [];
+        foreach ($dom->find('div[class=courtinfo] span') as $key=>$element)
+        {
+            $key == 0 ? $key = 'tiesa' : $key = 'instance';
+            //replace multiple spaces with a single space
+            $courtInfo[$key] = preg_replace('!\s+!', ' ',$element->plaintext);
+        }
+        return $courtInfo;
+    }
+
+    //index_201705.html
+    public static function getCurrentMonthUrl(){
+        $url = 'http://tis.ta.gov.lv/court.jm.gov.lv/stat/html/index_'. date('Ym').'.html';
+        return $url;
+    }
+
+    //pre tags for formatting
+    public static function preTag($input)
+    {
+        echo '<pre>';
+        var_dump($input);
+        echo '</pre>';
+    }
+
+
 }

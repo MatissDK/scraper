@@ -7,10 +7,11 @@
  */
 
 require('scraper_logic.php');
+// Turn off error reporting
 
-//ScraperLogic::getCourtInfo();
-//ScraperLogic::getDate();
-ScraperLogic::getUrl();
+$scraperClass = new ScraperLogic();
+$scraperClass->getUrl();
+
 ?>
 
 
