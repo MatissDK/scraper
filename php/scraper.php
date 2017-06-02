@@ -12,6 +12,8 @@ require('scraper_logic.php');
 $scraperClass = new ScraperLogic();
 $scraperClass->getUrl();
 
+//HelperFunctions::createLog('asdasdasdasd');
+
 ?>
 
 

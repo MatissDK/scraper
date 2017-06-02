@@ -32,7 +32,7 @@ class HelperFunctions {
         print_r($lastElement3);
     }
 
-    //analize which process/instance is it
+    //analyze which process/instance is it
     public static function getCourtInfo($dom)
     {
         $courtInfo = [];
@@ -50,6 +50,50 @@ class HelperFunctions {
         $url = 'http://tis.ta.gov.lv/court.jm.gov.lv/stat/html/index_'. date('Ym').'.html';
         return $url;
     }
+
+    //returns just instance of the court for filtering purposes
+    //in index position 0
+    public static function court($dom)
+    {
+        if(empty($dom) || $dom == null)
+        {
+            return;
+        }
+
+        foreach ($dom->find('div[class=courtinfo] span') as $key=>$element)
+        {
+            if($key == 1)
+            {
+                $wordsArray = explode(' ', $element->plaintext);
+            }
+        }
+
+        if($wordsArray[0] == 'Administratīvais')
+        {
+            $outValue = $wordsArray[0] . ' ' . $wordsArray[1];
+            return $outValue;
+        }
+        else
+        {
+            return $wordsArray[0];
+        }
+
+    }
+
+    //displaying log info
+
+    public static function createLog($data)
+    {
+        if(is_string($data))
+        {
+            $myLogfile = fopen('logs/' .date('d_m_y').'.txt'  , 'a') or die();
+            fwrite($myLogfile, $data);
+            fclose($myLogfile);
+        }
+    }
+
+
+
 
     //pre tags for formatting
     public static function preTag($input)
