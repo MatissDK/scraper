@@ -36,7 +36,7 @@ class ScraperLogic {
     //gets all URL from main page
     public function getUrl(){
 
-        if($this->getDate())
+        if(!$this->getDate())
         {
             // Find all links
             foreach ($this->html->find('a') as $element)
@@ -152,7 +152,6 @@ class ScraperLogic {
            {
                DbFunctions::saveAdmnistrativaParkapumaProcess(self::clearArray($tableInfo, $dom));
            }
-
            unset($tableInfo);
        }
     }
@@ -302,8 +301,6 @@ class ScraperLogic {
             $array_key => preg_replace("/&#?[a-z0-9]+;/i","",$cell->plaintext)
         );
     }
-
-
 
 
     //need to clear array for easy saving in DB, because at raw format it's nested inside other array

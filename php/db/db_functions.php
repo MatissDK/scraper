@@ -32,8 +32,6 @@ class DbFunctions
         }
         $connection = DBconnection::connection();
         $date = $dateArray['date'];
-        //time maybe will be useful in the future
-        //$time = $dateArray['time'];
         $query = "INSERT INTO last_update (date)
             SELECT * FROM (SELECT '$date') AS tmp
             WHERE NOT EXISTS (
@@ -87,12 +85,23 @@ class DbFunctions
             return;
         }
 
-        //global $connection;
         $data = "'" . implode("','", $dataArray) . "'";
+
+        $update_data = '';
+        foreach($dataArray as $key => $key_value) {
+            $update_data .= "". $key. "" . ' = '. "'" . $key_value."', ";
+        }
+
+        $formatted_update_data = rtrim($update_data, ', ');
+
         if(is_array($dataArray))
         {
-            $query = "INSERT INTO kriminalprocess (" . implode(',', array_keys($dataArray)) . ") values (". $data .")";
+            $query = "INSERT INTO kriminalprocess (" . implode(',', array_keys($dataArray)) . ") values (". $data .") 
+                        ON DUPLICATE KEY UPDATE $formatted_update_data";
+
             $result = mysqli_query(DBconnection::connection(), $query);
+
+            echo($query);
 
             if (!$result)
             {
